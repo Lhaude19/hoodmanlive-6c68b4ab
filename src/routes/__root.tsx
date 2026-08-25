@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { Masthead, Footer } from "@/components/layout/Masthead";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -77,11 +78,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "theme-color", content: "#6E1E2A" },
+      { title: "hoodmanlive — Independent Editorial" },
+      {
+        name: "description",
+        content:
+          "Expert-journalist standard news, articles, programs, and events. A source of credible truth for the ASAP GRAY audience.",
+      },
+      { property: "og:title", content: "hoodmanlive — Independent Editorial" },
+      {
+        property: "og:description",
+        content:
+          "Independent editorial: news, articles, programs, and events held to an expert-journalist standard.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -92,6 +101,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://api.fontshare.com" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700,800&f[]=general-sans@300,400,500,600,700&f[]=gambetta@400,500,600,700&display=swap",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -106,7 +126,7 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="font-body antialiased">
         {children}
         <Scripts />
       </body>
@@ -119,8 +139,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <Masthead />
+      <main id="main-content">
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </main>
+      <Footer />
     </QueryClientProvider>
   );
 }
