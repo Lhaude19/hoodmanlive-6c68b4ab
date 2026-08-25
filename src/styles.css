@@ -1,144 +1,162 @@
-@import "tailwindcss" source(none);
-@source "../src";
-@import "tw-animate-css";
+/* Fontshare-exclusive families — load via Fontshare CSS (not Google Fonts) */
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700,800&f[]=general-sans@300,400,500,600,700&f[]=gambetta@400,500,600,700&display=swap");
+/* Playfair Display is on Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap");
+@import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
-
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+@theme {
+  --font-clash: "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --font-body: "General Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-gambetta: "Gambetta", Georgia, serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  /* DESIGN.md locked 5-color system */
+  --maroon: #6E1E2A;
+  --gold: #C9A646;
+  --navy: #14213D;
+  --ivory: #FAF6EC;
+  --orange: #D46010;
+  --error: #9f3030;
+  --success: #2f6a4a;
+  --warning: #c17e2a;
+
+  /* Semantic aliases derived from design tokens */
+  --ink: var(--navy);
+  --ink-soft: color-mix(in oklab, var(--navy) 64%, transparent);
+  --accent: var(--gold);
+  --bg-page: var(--ivory);
+  --bg-masthead: var(--maroon);
+  --bg-footer: var(--navy);
+  --border-line: color-mix(in oklab, var(--navy) 20%, transparent);
+  --border-strong: color-mix(in oklab, var(--navy) 32%, transparent);
 }
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+/* Light-only v1 — OS dark preference does NOT override */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+  }
 }
 
-@layer base {
+/* Fluid type scale (DESIGN.md) */
+.fs-display-sm { font-size: clamp(1.75rem, 1.5vw + 1rem, 2.25rem); line-height: 1.2; }
+.fs-display-md { font-size: clamp(2.25rem, 2vw + 1.25rem, 3rem); line-height: 1.15; }
+.fs-display-lg { font-size: clamp(2.75rem, 3vw + 1.5rem, 4rem); line-height: 1.1; }
+.fs-body-default { font-size: 1rem; line-height: 1.6; }
+.fs-body-large { font-size: 1.125rem; line-height: 1.6; }
+.fs-body-small { font-size: 0.875rem; line-height: 1.5; }
+.fs-standfirst { font-size: 1.25rem; line-height: 1.6; }
+
+/* 8pt spacing scale */
+.sp-1 { padding: 4px; }
+.sp-2 { padding: 8px; }
+.sp-3 { padding: 12px; }
+.sp-4 { padding: 16px; }
+.sp-5 { padding: 20px; }
+.sp-6 { padding: 24px; }
+.sp-8 { padding: 32px; }
+.sp-10 { padding: 40px; }
+.sp-12 { padding: 48px; }
+.sp-14 { padding: 56px; }
+.sp-16 { padding: 64px; }
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+.font-clash { font-family: var(--font-clash); }
+.font-playfair { font-family: var(--font-playfair); }
+.font-gambetta { font-family: var(--font-gambetta); }
+
+.text-maroon { color: var(--maroon); }
+.text-gold { color: var(--gold); }
+.text-navy { color: var(--navy); }
+.text-orange { color: var(--orange); }
+.text-ivory { color: var(--ivory); }
+.text-ivory72 { color: color-mix(in oklab, var(--ivory) 72%, transparent); }
+.text-ivory56 { color: color-mix(in oklab, var(--ivory) 56%, transparent); }
+.bg-ivory12 { background-color: color-mix(in oklab, var(--ivory) 12%, transparent); }
+.hover\:text-ivory72:hover { color: color-mix(in oklab, var(--ivory) 72%, transparent); }
+.hover\:bg-ivory12:hover { background-color: color-mix(in oklab, var(--ivory) 12%, transparent); }
+
+.bg-maroon { background-color: var(--maroon); }
+.bg-navy { background-color: var(--navy); }
+.bg-ivory { background-color: var(--ivory); }
+.bg-gold { background-color: var(--gold); }
+
+.border-maroon { border-color: var(--maroon); }
+.border-navy { border-color: var(--navy); }
+
+/* Layout helpers */
+.page-wrap {
+  width: min(1200px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+/* Focus rings — WCAG 2.1 AA (3px per DESIGN.md) */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
   * {
-    border-color: var(--color-border);
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
+}
 
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-  }
+/* Skip link (visible on focus only) */
+.skip-link {
+  position: absolute;
+  top: -2.5rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--maroon);
+  color: var(--ivory);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 4px 4px;
+  transition: top 180ms ease;
+}
+.skip-link:focus-visible {
+  top: 0;
+}
+
+/* Link styling - scoped to content areas only */
+main a,
+article a,
+.prose a {
+  color: var(--maroon);
+  text-decoration: none;
+}
+main a:hover,
+article a:hover,
+.prose a:hover {
+  color: var(--gold);
 }
