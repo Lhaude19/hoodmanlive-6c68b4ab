@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -19,8 +20,14 @@ import { Route as SubscribeRouteImport } from './routes/subscribe'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ArticleSlugRouteImport } from './routes/article.$slug'
 import { Route as AuthorsSlugRouteImport } from './routes/authors.$slug'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardEditionsRouteImport } from './routes/dashboard/editions'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
+import { Route as DashboardTeamRouteImport } from './routes/dashboard/team'
 import { Route as EventsSlugRouteImport } from './routes/events.$slug'
 import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
+import { Route as DashboardArticlesIndexRouteImport } from './routes/dashboard/articles/index'
+import { Route as DashboardArticlesArticleIdRouteImport } from './routes/dashboard/articles/$articleId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,6 +37,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsRoute = EventsRouteImport.update({
@@ -72,6 +84,26 @@ const AuthorsSlugRoute = AuthorsSlugRouteImport.update({
   path: '/authors/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardEditionsRoute = DashboardEditionsRouteImport.update({
+  id: '/editions',
+  path: '/editions',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTeamRoute = DashboardTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const EventsSlugRoute = EventsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -82,10 +114,22 @@ const ProgramsSlugRoute = ProgramsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ProgramsRoute,
 } as any)
+const DashboardArticlesIndexRoute = DashboardArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardArticlesArticleIdRoute =
+  DashboardArticlesArticleIdRouteImport.update({
+    id: '/articles/$articleId',
+    path: '/articles/$articleId',
+    getParentRoute: () => DashboardRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/events': typeof EventsRouteWithChildren
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
@@ -94,8 +138,14 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/article/$slug': typeof ArticleSlugRoute
   '/authors/$slug': typeof AuthorsSlugRoute
+  '/dashboard/editions': typeof DashboardEditionsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/team': typeof DashboardTeamRoute
   '/events/$slug': typeof EventsSlugRoute
   '/programs/$slug': typeof ProgramsSlugRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/articles/$articleId': typeof DashboardArticlesArticleIdRoute
+  '/dashboard/articles/': typeof DashboardArticlesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -108,13 +158,20 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/article/$slug': typeof ArticleSlugRoute
   '/authors/$slug': typeof AuthorsSlugRoute
+  '/dashboard/editions': typeof DashboardEditionsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/team': typeof DashboardTeamRoute
   '/events/$slug': typeof EventsSlugRoute
   '/programs/$slug': typeof ProgramsSlugRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/articles/$articleId': typeof DashboardArticlesArticleIdRoute
+  '/dashboard/articles': typeof DashboardArticlesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/events': typeof EventsRouteWithChildren
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
@@ -123,14 +180,21 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/article/$slug': typeof ArticleSlugRoute
   '/authors/$slug': typeof AuthorsSlugRoute
+  '/dashboard/editions': typeof DashboardEditionsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/team': typeof DashboardTeamRoute
   '/events/$slug': typeof EventsSlugRoute
   '/programs/$slug': typeof ProgramsSlugRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/articles/$articleId': typeof DashboardArticlesArticleIdRoute
+  '/dashboard/articles/': typeof DashboardArticlesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/dashboard'
     | '/events'
     | '/news'
     | '/privacy'
@@ -139,8 +203,14 @@ export interface FileRouteTypes {
     | '/terms'
     | '/article/$slug'
     | '/authors/$slug'
+    | '/dashboard/editions'
+    | '/dashboard/settings'
+    | '/dashboard/team'
     | '/events/$slug'
     | '/programs/$slug'
+    | '/dashboard/'
+    | '/dashboard/articles/$articleId'
+    | '/dashboard/articles/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -153,12 +223,19 @@ export interface FileRouteTypes {
     | '/terms'
     | '/article/$slug'
     | '/authors/$slug'
+    | '/dashboard/editions'
+    | '/dashboard/settings'
+    | '/dashboard/team'
     | '/events/$slug'
     | '/programs/$slug'
+    | '/dashboard'
+    | '/dashboard/articles/$articleId'
+    | '/dashboard/articles'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/dashboard'
     | '/events'
     | '/news'
     | '/privacy'
@@ -167,13 +244,20 @@ export interface FileRouteTypes {
     | '/terms'
     | '/article/$slug'
     | '/authors/$slug'
+    | '/dashboard/editions'
+    | '/dashboard/settings'
+    | '/dashboard/team'
     | '/events/$slug'
     | '/programs/$slug'
+    | '/dashboard/'
+    | '/dashboard/articles/$articleId'
+    | '/dashboard/articles/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   EventsRoute: typeof EventsRouteWithChildren
   NewsRoute: typeof NewsRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -198,6 +282,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events': {
@@ -256,6 +347,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthorsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/editions': {
+      id: '/dashboard/editions'
+      path: '/editions'
+      fullPath: '/dashboard/editions'
+      preLoaderRoute: typeof DashboardEditionsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/team': {
+      id: '/dashboard/team'
+      path: '/team'
+      fullPath: '/dashboard/team'
+      preLoaderRoute: typeof DashboardTeamRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/events/$slug': {
       id: '/events/$slug'
       path: '/$slug'
@@ -270,8 +389,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsSlugRouteImport
       parentRoute: typeof ProgramsRoute
     }
+    '/dashboard/articles/': {
+      id: '/dashboard/articles/'
+      path: '/articles'
+      fullPath: '/dashboard/articles/'
+      preLoaderRoute: typeof DashboardArticlesIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/articles/$articleId': {
+      id: '/dashboard/articles/$articleId'
+      path: '/articles/$articleId'
+      fullPath: '/dashboard/articles/$articleId'
+      preLoaderRoute: typeof DashboardArticlesArticleIdRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
+
+interface DashboardRouteChildren {
+  DashboardEditionsRoute: typeof DashboardEditionsRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardTeamRoute: typeof DashboardTeamRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardArticlesArticleIdRoute: typeof DashboardArticlesArticleIdRoute
+  DashboardArticlesIndexRoute: typeof DashboardArticlesIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardEditionsRoute: DashboardEditionsRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardTeamRoute: DashboardTeamRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  DashboardArticlesArticleIdRoute: DashboardArticlesArticleIdRoute,
+  DashboardArticlesIndexRoute: DashboardArticlesIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
 
 interface EventsRouteChildren {
   EventsSlugRoute: typeof EventsSlugRoute
@@ -299,6 +454,7 @@ const ProgramsRouteWithChildren = ProgramsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   EventsRoute: EventsRouteWithChildren,
   NewsRoute: NewsRoute,
   PrivacyRoute: PrivacyRoute,
