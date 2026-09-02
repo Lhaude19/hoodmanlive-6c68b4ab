@@ -1,3 +1,4 @@
+/* Fonts (Fontshare + Playfair Display) are loaded via <link> tags in src/routes/__root.tsx */
 @import "tailwindcss";
 
 @theme {
@@ -25,6 +26,8 @@
   --bg-page: var(--ivory);
   --bg-masthead: var(--maroon);
   --bg-footer: var(--navy);
+  --bg-dashboard: color-mix(in oklab, var(--ivory) 92%, var(--navy));
+  --bg-muted: color-mix(in oklab, var(--ivory) 85%, var(--border-line));
   --border-line: color-mix(in oklab, var(--navy) 20%, transparent);
   --border-strong: color-mix(in oklab, var(--navy) 32%, transparent);
 }
@@ -155,4 +158,45 @@ main a:hover,
 article a:hover,
 .prose a:hover {
   color: var(--gold);
+}
+
+/* Masthead navigation active state */
+.nav-link {
+  position: relative;
+  transition: color 150ms ease;
+}
+.nav-link.is-active {
+  color: var(--gold);
+}
+.nav-link.is-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+}
+
+/* Navigation active state (Masthead) */
+.nav-link {
+  border-bottom: 2px solid transparent;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+.nav-link.is-active,
+.nav-link[aria-current="page"] {
+  border-color: var(--gold);
+}
+
+/* Breaking news marquee bar */
+@media (min-width: 640px) {
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
 }

@@ -1,10 +1,9 @@
 import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
-import { useState, FormEvent } from 'react'
-
-const SUPABASE_URL = 'https://psikyjrwidnqpwujkaou.supabase.co'
-const SUPABASE_ANON_KEY = 'sb_publishable_9oJxctjQNMTmpNWRpbutgA_PnDEqYCp'
+import { subscribeToBrevo, NEWSLETTER_CONFIG } from '@/lib/brevo'
+import { useState } from 'react'
+import type { FormEvent } from 'react'
 
 export interface NewsletterBandProps {
   className?: string
@@ -21,30 +20,26 @@ export function NewsletterBand({ className }: NewsletterBandProps) {
     setMessage('')
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=minimal',
-        },
-        body: JSON.stringify({ email, source: 'hoodmanlive' }),
+      const result = await subscribeToBrevo({
+        email,
+        listId: NEWSLETTER_CONFIG.listId,
+        templateId: NEWSLETTER_CONFIG.templateId,
+        redirectionUrl: NEWSLETTER_CONFIG.redirectionUrl,
+        attributes: { SOURCE: 'hoodmanlive' },
       })
 
-      if (!res.ok) {
-        const error = await res.json().catch(() => ({}))
-        throw new Error(error.message || 'Subscription failed')
+      if (!result.success) {
+        throw new Error(result.message)
       }
 
       setStatus('success')
-      setMessage('You are on the list. Check your inbox to confirm.')
+      setMessage(result.message)
       setEmail('')
     } catch (err: any) {
       setStatus('error')
-      setMessage(err.message === 'Duplicate key value violates unique constraint' 
-        ? 'You are already subscribed.' 
-        : 'Something went wrong. Please try again.')
+      setMessage(err.message.includes('already subscribe')
+        ? 'You are already subscribed.'
+        : err.message || 'Something went wrong. Please try again.')
     }
   }
 
