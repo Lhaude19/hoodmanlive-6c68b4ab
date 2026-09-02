@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { Card, CardContent } from '@/components/ui/Card'
-import { formatDate } from '@/lib/utils'
-import { NewsletterBand } from '@/components/layout/NewsletterBand'
+import { Card, CardContent } from '#/components/ui/Card'
+import { formatDate } from '#/lib/utils'
+import { NewsletterBand } from '#/components/layout/NewsletterBand'
 import { useState } from 'react'
-import { events } from '@/lib/content'
+import { events } from '#/lib/content'
 
 export const Route = createFileRoute('/events')({ component: EventsPage })
 

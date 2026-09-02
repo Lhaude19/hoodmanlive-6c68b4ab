@@ -24,7 +24,11 @@ export interface Article {
   publishedAt: string
   author: string // matches Author.name
   authorSlug: string
+  authorRole: string // matches Author.role
+  image: string // path to article hero image
   imageAlt: string
+  inlineImage: string // path to inline article image
+  inlineImageAlt: string
   body: string[]
   relatedSlugs: string[]
 }
@@ -86,7 +90,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-24',
     author: 'Ama Serwaa',
     authorSlug: 'ama-serwaa',
+    authorRole: 'Senior Correspondent',
+    image: '/articles/accra-silent-logistics-gap.png',
     imageAlt: 'Shipping containers at Tema port at dusk, warm maroon light',
+    inlineImage: '/articles/lagos-nairobi-corridor.png',
+    inlineImageAlt: 'A truck on a highway at sunset, containers visible',
     body: [
       "The container sat at Tema port for nineteen days before anyone at the startup knew it had cleared customs. By then the retailer who had promised to stock it had moved on. The founders did not lose the order because the product was wrong. They lost it because the distance between a ship and a shelf in this city is still paved with guesswork.",
       "This is the quiet infrastructure story behind West Africa's founder boom: not who raises capital, but who can actually move things. We spent six months following eleven ventures across Accra, Kumasi, and the corridor to Abidjan to map where the system helps and where it quietly breaks.",
@@ -114,7 +122,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-23',
     author: 'Ama Serwaa',
     authorSlug: 'ama-serwaa',
+    authorRole: 'Senior Correspondent',
+    image: '/articles/ssa-music-120m.png',
     imageAlt: 'Vinyl records and a mixing console in maroon ambient light',
+    inlineImage: '/articles/ghana-fashion-2-42bn.png',
+    inlineImageAlt: "Tailor's workshop with bolts of West African print fabric",
     body: [
       "Sub-Saharan Africa's recorded music revenue reached US$120 million in 2025, growing 15.2% year on year, according to the IFPI Global Music Report 2026. South Africa accounted for 78.1% of that total. The headline is growth. The harder question is distribution.",
       "## The streaming engine",
@@ -139,7 +151,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-22',
     author: 'Kwame Osei',
     authorSlug: 'kwame-osei',
+    authorRole: 'Markets & Trade',
+    image: '/articles/ghana-fashion-2-42bn.png',
     imageAlt: "Tailor's workshop with bolts of West African print fabric",
+    inlineImage: '/articles/africa-fintech-640m.png',
+    inlineImageAlt: 'Abstract rendering of payment rails and mobile money flows',
     body: [
       "Ghana's fashion industry contributed about US$2.42 billion to the national economy in 2025, roughly three per cent of GDP, with the sector formally employing over 25,000 people, according to the Ministry of Tourism, Culture and Creative Arts.",
       "## The showroom vs. the workshop",
@@ -164,7 +180,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-21',
     author: 'Zara Mwangi',
     authorSlug: 'zara-mwangi',
+    authorRole: 'Enterprise',
+    image: '/articles/africa-fintech-640m.png',
     imageAlt: 'Abstract rendering of payment rails and mobile money flows',
+    inlineImage: '/articles/youth-jobs-gap.png',
+    inlineImageAlt: 'Young entrepreneurs in a shared workspace, daylight',
     body: [
       "African fintech startups raised an estimated US$640 million in the first half of 2025, roughly 45% of all disclosed venture investment on the continent, according to Africa: The Big Deal. For the fourth straight year, money followed the rails.",
       "## The concentration problem",
@@ -189,7 +209,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-20',
     author: 'Editorial Desk',
     authorSlug: 'editorial-desk',
+    authorRole: 'Standards & Review',
+    image: '/articles/youth-jobs-gap.png',
     imageAlt: 'Young entrepreneurs in a shared workspace, daylight',
+    inlineImage: '/articles/three-borders-reopened.png',
+    inlineImageAlt: 'A busy land border crossing at first light',
     body: [
       "Each year, between 10 and 12 million young Africans enter the labour market, which offers only about three million formal jobs annually, the African Development Bank reports. The arithmetic is not a forecast. It is the present.",
       "## The only multiplier",
@@ -211,7 +235,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-24',
     author: 'Kwame Osei',
     authorSlug: 'kwame-osei',
+    authorRole: 'Markets & Trade',
+    image: '/articles/three-borders-reopened.png',
     imageAlt: 'A busy land border crossing at first light',
+    inlineImage: '/articles/consultant-class-digitisation.png',
+    inlineImageAlt: 'A modern office building with glass windows, daylight',
     body: [
       "Three land borders reopened this quarter after two years of intermittent closure. For the traders who plan their year around them, the news is not symbolic. It is inventory.",
       "## What traders told us",
@@ -233,7 +261,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-24',
     author: 'Zara Mwangi',
     authorSlug: 'zara-mwangi',
+    authorRole: 'Enterprise',
+    image: '/articles/climate-adaptive-cohort.png',
     imageAlt: 'A greenhouse frame against a bright sky',
+    inlineImage: '/articles/how-we-verify.png',
+    inlineImageAlt: 'A desk with a notebook and a printed document',
     body: [
       "Twelve ventures joined this year's climate-adaptive agriculture cohort. One constraint unites them: produce food that survives a hotter, drier, more erratic season.",
       "## The pitches",
@@ -255,7 +287,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-23',
     author: 'Editorial Desk',
     authorSlug: 'editorial-desk',
+    authorRole: 'Standards & Review',
+    image: '/articles/how-we-verify.png',
     imageAlt: 'A desk with a notebook and a printed document',
+    inlineImage: '/articles/climate-adaptive-cohort.png',
+    inlineImageAlt: 'A greenhouse frame against a bright sky',
     body: [
       "Every hoodmanlive figure traces to a named source: a report, a dataset, or an on-record interview. When we use a secondary account, we say so and link the primary.",
       "## Our correction policy",
@@ -277,7 +313,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-19',
     author: 'Kwame Osei',
     authorSlug: 'kwame-osei',
+    authorRole: 'Markets & Trade',
+    image: '/articles/lagos-nairobi-corridor.png',
     imageAlt: 'A truck on a highway at sunset, containers visible',
+    inlineImage: '/articles/accra-silent-logistics-gap.png',
+    inlineImageAlt: 'Shipping containers at Tema port at dusk, warm maroon light',
     body: [
       "The Lagos-Nairobi corridor is not a startup story. It is a logistics story — one written by manufacturers who move goods across borders without the headlines.",
       "## The mid-market",
@@ -299,7 +339,11 @@ export const articles: Article[] = [
     publishedAt: '2026-08-18',
     author: 'Ama Serwaa',
     authorSlug: 'ama-serwaa',
+    authorRole: 'Senior Correspondent',
+    image: '/articles/consultant-class-digitisation.png',
     imageAlt: 'A modern office building with glass windows, daylight',
+    inlineImage: '/articles/lagos-nairobi-corridor.png',
+    inlineImageAlt: 'A truck on a highway at sunset, containers visible',
     body: [
       "Governments across Africa are spending billions on digitisation. The question is who captures the value — and what actually gets delivered.",
       "## The contract pipeline",

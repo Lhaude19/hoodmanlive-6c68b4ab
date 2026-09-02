@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { Chip } from '@/components/ui/Chip'
-import { Card, CardContent } from '@/components/ui/Card'
-import { Avatar } from '@/components/ui/Avatar'
-import { formatDate } from '@/lib/utils'
-import { NewsletterBand } from '@/components/layout/NewsletterBand'
-import { articles, getArticle } from '@/lib/content'
+import { Chip } from '#/components/ui/Chip'
+import { Card, CardContent } from '#/components/ui/Card'
+import { Avatar } from '#/components/ui/Avatar'
+import { formatDate } from '#/lib/utils'
+import { NewsletterBand } from '#/components/layout/NewsletterBand'
+import { articles, getArticle } from '#/lib/content'
 import { useState } from 'react'
 
 export const Route = createFileRoute('/news')({ component: NewsPage })
@@ -37,10 +37,11 @@ function NewsPage() {
       slug: a.slug,
       excerpt: a.excerpt,
       author: a.author,
-      authorRole: a.authorRole ?? '',
+      authorRole: a.authorRole,
       authorSlug: a.authorSlug,
       publishedAt: a.publishedAt,
       imageAlt: a.imageAlt,
+      image: a.image,
     }))
 
   const list = active === 'all' ? all : all.filter((a) => a.categoryId === active)
@@ -70,9 +71,13 @@ function NewsPage() {
 
         <article className="grid lg:grid-cols-12 gap-8 mb-10 pb-10 border-b border-[var(--border-line)]">
           <div className="lg:col-span-7 aspect-[16/9] rounded-lg overflow-hidden bg-gradient-to-br from-[var(--maroon)]/10 via-[var(--ivory)] to-[var(--navy)]/10 relative">
-            <div className="w-full h-full flex items-center justify-center">
-              <span className="text-[var(--ink-soft)] text-sm font-body">{featured.imageAlt}</span>
-            </div>
+            {featured.image ? (
+              <img src={featured.image} alt={featured.imageAlt} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-[var(--ink-soft)] text-sm font-body">{featured.imageAlt}</span>
+              </div>
+            )}
           </div>
           <div className="lg:col-span-5 flex flex-col justify-center">
             <span className="font-clash text-xs uppercase tracking-wider text-[var(--orange)] mb-3">{featured.category}</span>

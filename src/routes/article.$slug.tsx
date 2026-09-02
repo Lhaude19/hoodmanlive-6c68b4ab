@@ -1,9 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { Avatar } from '@/components/ui/Avatar'
-import { formatDate } from '@/lib/utils'
-import { NewsletterBand } from '@/components/layout/NewsletterBand'
-import { getArticle, getRelated } from '@/lib/content'
+import { Avatar } from '#/components/ui/Avatar'
+import { formatDate } from '#/lib/utils'
+import { NewsletterBand } from '#/components/layout/NewsletterBand'
+import { getArticle, getRelated } from '#/lib/content'
+import { useState, useEffect } from 'react'
 
 export const Route = createFileRoute('/article/$slug')({
   component: ArticlePage,
@@ -23,8 +24,14 @@ function ArticlePage() {
     )
   }
 
-  const author = getArticle(route.slug)
+  const [shareUrl, setShareUrl] = useState('#')
   const related = getRelated(article)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setShareUrl(window.location.href)
+    }
+  }, [])
 
   return (
     <>
@@ -50,9 +57,11 @@ function ArticlePage() {
             </div>
 
             <figure className="aspect-video rounded-lg overflow-hidden bg-gradient-to-br from-[var(--maroon)]/10 via-[var(--ivory)] to-[var(--navy)]/10 relative mb-10">
-              <div className="w-full h-full flex items-center justify-center">
-                <span className="text-[var(--ink-soft)] text-sm font-body">{article.imageAlt}</span>
-              </div>
+              <img
+                src={article.image}
+                alt={article.imageAlt}
+                className="w-full h-full object-cover"
+              />
               <figcaption className="absolute left-4 bottom-3 text-ivory72 font-clash text-xs letter-spacing-wide">
                 PHOTOGRAPHY — {article.imageAlt}
               </figcaption>
@@ -102,24 +111,28 @@ function ArticlePage() {
             })}
 
             <figure className="aspect-[3/2] rounded-lg overflow-hidden bg-gradient-to-br from-[var(--navy)]/10 via-[var(--ivory)] to-[var(--maroon)]/10 relative my-10">
-              <div className="w-full h-full flex items-center justify-center">
-                <span className="text-[var(--ink-soft)] text-sm font-body">Inline photograph</span>
-              </div>
+              {article.inlineImage ? (
+                <img src={article.inlineImage} alt={article.inlineImageAlt} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <span className="text-[var(--ink-soft)] text-sm font-body">Inline photograph</span>
+                </div>
+              )}
               <figcaption className="absolute left-4 bottom-3 text-ivory72 font-clash text-xs letter-spacing-wide">
-                PHOTOGRAPHY — ASAP GRAY / credit slot
+                PHOTOGRAPHY — {article.inlineImageAlt || 'ASAP GRAY / credit slot'}
               </figcaption>
             </figure>
 
             <div className="flex flex-wrap items-center gap-3 pt-6 border-t border-[var(--border-line)] font-clash text-sm text-[var(--ink-soft)]">
               <span>Share:</span>
               <button
-                onClick={() => navigator.clipboard?.writeText(window.location.href)}
+                onClick={() => navigator.clipboard?.writeText(shareUrl)}
                 className="border-b-2 border-[var(--gold)] hover:text-[var(--orange)] transition-colors bg-transparent cursor-pointer"
               >
                 Copy link
               </button>
               <a
-                href={`https://x.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(window.location.href)}`}
+                href={`https://x.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(shareUrl)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-b-2 border-[var(--gold)] hover:text-[var(--orange)] transition-colors no-underline"
@@ -127,7 +140,7 @@ function ArticlePage() {
                 X
               </a>
               <a
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`}
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-b-2 border-[var(--gold)] hover:text-[var(--orange)] transition-colors no-underline"
