@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { Avatar } from '#/components/ui/Avatar'
-import { NewsletterBand } from '#/components/layout/NewsletterBand'
-import { authors, aboutCopy } from '#/lib/content'
+import { Avatar } from '@/components/ui/Avatar'
+import { NewsletterBand } from '@/components/layout/NewsletterBand'
+import { authors, aboutCopy } from '@/lib/content'
 
 export const Route = createFileRoute('/about')({ component: AboutPage })
 

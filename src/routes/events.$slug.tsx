@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { formatDate } from '#/lib/utils'
-import { NewsletterBand } from '#/components/layout/NewsletterBand'
-import { getEvent } from '#/lib/content'
+import { formatDate } from '@/lib/utils'
+import { NewsletterBand } from '@/components/layout/NewsletterBand'
+import { getEvent } from '@/lib/content'
 
 export const Route = createFileRoute('/events/$slug')({ component: EventDetailPage })
 

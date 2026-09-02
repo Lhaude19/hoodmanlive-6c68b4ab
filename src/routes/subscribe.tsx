@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Input } from '#/components/ui/Input'
-import { Button } from '#/components/ui/Button'
-import { subscribeToBrevo, NEWSLETTER_CONFIG } from '#/lib/brevo'
+import { Input } from '@/components/ui/Input'
+import { Button } from '@/components/ui/Button'
+import { subscribeToBrevo, NEWSLETTER_CONFIG } from '@/lib/brevo'
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 

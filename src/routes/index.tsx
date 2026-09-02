@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { NewsletterBand } from '#/components/layout/NewsletterBand'
-import { articles } from '#/lib/content'
-import { Avatar } from '#/components/ui/Avatar'
+import { NewsletterBand } from '@/components/layout/NewsletterBand'
+import { articles } from '@/lib/content'
+import { Avatar } from '@/components/ui/Avatar'
 
 export const Route = createFileRoute('/')({ component: Home })
 

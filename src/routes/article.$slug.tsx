@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { Avatar } from '#/components/ui/Avatar'
-import { formatDate } from '#/lib/utils'
-import { NewsletterBand } from '#/components/layout/NewsletterBand'
-import { getArticle, getRelated } from '#/lib/content'
+import { Avatar } from '@/components/ui/Avatar'
+import { formatDate } from '@/lib/utils'
+import { NewsletterBand } from '@/components/layout/NewsletterBand'
+import { getArticle, getRelated } from '@/lib/content'
 import { useState, useEffect } from 'react'
 
 export const Route = createFileRoute('/article/$slug')({

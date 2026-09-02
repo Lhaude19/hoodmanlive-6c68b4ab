@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
-import { Chip } from '#/components/ui/Chip'
-import { Card, CardContent } from '#/components/ui/Card'
-import { Avatar } from '#/components/ui/Avatar'
-import { formatDate } from '#/lib/utils'
-import { NewsletterBand } from '#/components/layout/NewsletterBand'
-import { articles, getArticle } from '#/lib/content'
+import { Chip } from '@/components/ui/Chip'
+import { Card, CardContent } from '@/components/ui/Card'
+import { Avatar } from '@/components/ui/Avatar'
+import { formatDate } from '@/lib/utils'
+import { NewsletterBand } from '@/components/layout/NewsletterBand'
+import { articles, getArticle } from '@/lib/content'
 import { useState } from 'react'
 
 export const Route = createFileRoute('/news')({ component: NewsPage })
