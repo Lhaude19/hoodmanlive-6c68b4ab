@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Masthead, Footer } from "@/components/layout/Masthead";
+import { BreakingNewsBar } from "@/components/layout/BreakingNewsBar";
+import { AuthProvider } from "@/lib/auth";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -139,12 +141,17 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Masthead />
-      <main id="main-content">
+      <AuthProvider>
+        <Masthead />
+        <BreakingNewsBar
+          items={[{ label: "ADeCa 2026 applications close Sept 15", href: "/events" }]}
+        />
+        <main id="main-content">
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-      </main>
-      <Footer />
+          <Outlet />
+        </main>
+        <Footer />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
